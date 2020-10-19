@@ -19,7 +19,7 @@
     "react-scripts": "3.4.3",
     "uuid": "8.1.0",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -d build"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0"
