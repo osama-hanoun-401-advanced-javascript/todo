@@ -1,6 +1,6 @@
 {
   "name": "demo-context-api",
-  "homepage": "/todo",
+  "homepage": "https://osama-hanoun-401-advanced-javascript.github.io/todo",
   "version": "1.0.0",
   "description": "",
   "keywords": [],
@@ -17,7 +17,9 @@
     "react-dom": "^16.14.0",
     "react-jsonschema-form": "1.8.1",
     "react-scripts": "3.4.3",
-    "uuid": "8.1.0"
+    "uuid": "8.1.0",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0"
