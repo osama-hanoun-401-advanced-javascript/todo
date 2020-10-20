@@ -14,7 +14,6 @@ const todoAPI = 'https://api-js401.herokuapp.com/api/v1/todo';
 
 const ToDo = () => {
   const [list, isLoading, addItem, toggleComplete, deleteItem] = useAjax(todoAPI);
-  console.log('in todo ', isLoading)
 
 
   return (

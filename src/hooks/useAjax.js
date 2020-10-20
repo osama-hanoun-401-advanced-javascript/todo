@@ -79,6 +79,7 @@ const useAjax = (url) => {
 
     useEffect(() => {
         _read();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return [
@@ -87,6 +88,7 @@ const useAjax = (url) => {
         _create,
         _update,
         _delete,
+        _read,
     ]
 };
 

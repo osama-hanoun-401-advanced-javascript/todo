@@ -18,11 +18,11 @@ function TodoList(props) {
             <Container>
               <Row >
                 <Col xs={1}>
-                  <Button size="sm" onClick={() => props.handleComplete(item._id)} pill variant={item.complete ? "danger" : "success"}> {item.complete ? <a> Complete</a> : <a>Pending</a>} </Button>
+                  <Button size="sm" onClick={() => props.handleComplete(item._id)} pill variant={item.complete ? "danger" : "success"}> {item.complete ? <span> Complete</span> : <span>Pending</span>} </Button>
                 </Col>
 
                 <Col xs={{ span: 1, offset: 10 }}>
-                  <Button size="sm" onClick={() => props.handleDelete(item._id)} ><a> X </a></Button>
+                  <Button size="sm" onClick={() => props.handleDelete(item._id)} ><span> X </span></Button>
                 </Col>
               </Row>
               <hr />
