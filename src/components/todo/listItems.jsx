@@ -9,6 +9,9 @@ function TodoItems(props) {
     const [listArr, setListArr] = useState([...props.listArr.listArr]);
     console.log('TodoItems', props.listArr.listArr)
     useEffect(() => {
+    }, []);
+
+    useEffect(() => {
         setListArr([...props.listArr.listArr])
     }, [props]);
     return (
@@ -22,11 +25,11 @@ function TodoItems(props) {
                             <Container>
                                 <Row >
                                     <Col xs={1}>
-                                        <Button size="sm" onClick={() => props.handleComplete(item._id)} pill variant={item.complete ? "danger" : "success"}> {item.complete ? <span> Complete</span> : <span>Pending</span>} </Button>
+                                        <Button size="sm" onClick={() => props.handlers.handleComplete(item._id)} pill={'true'} variant={item.complete ? "danger" : "success"}> {item.complete ? <span> Complete</span> : <span>Pending</span>} </Button>
                                     </Col>
 
                                     <Col xs={{ span: 1, offset: 10 }}>
-                                        <Button size="sm" onClick={() => props.handleDelete(item._id)} ><span> X </span></Button>
+                                        <Button size="sm" onClick={() => props.handlers.handleDelete(item._id)} ><span> X </span></Button>
                                     </Col>
                                 </Row>
                                 <hr />
@@ -47,9 +50,6 @@ function TodoItems(props) {
                                 </Row>
 
                             </Container>
-
-
-
                         </ListGroup.Item>
                     ))
                 }

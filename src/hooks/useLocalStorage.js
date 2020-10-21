@@ -7,9 +7,11 @@ const useLocalStorage = (key, defaultValue) => {
     useEffect(() => {
         let localStorageValue = localStorage.getItem(key);
         setValue(localStorageValue ? JSON.parse(localStorageValue) : defaultValue);
+        // eslint-disable-next-line react-hooks/exhaustive-deps 
     }, []);
     useEffect(() => {
         localStorage.setItem(key, JSON.stringify(value));
+        // eslint-disable-next-line react-hooks/exhaustive-deps 
     }, [value]);
 
 
