@@ -78,7 +78,7 @@ function TodoList(props) {
 
   return (
     <>
-      <ListItems listArr={shownItems.listArr} />
+      <ListItems listArr={shownItems} />
       <Container>
         <Row >
           {render.numberOfPagesArr.map((val, indx) => <Button onClick={_handleOnClick} className="m-2" value={indx + 1} key={indx + 1}> {indx + 1}</Button>)}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -6,8 +6,11 @@ import Container from 'react-bootstrap/Container';
 import ListGroup from 'react-bootstrap/ListGroup'
 
 function TodoItems(props) {
-    const [listArr, setListArr] = useState([...props.listArr]);
-    console.log('TodoItems', listArr)
+    const [listArr, setListArr] = useState([...props.listArr.listArr]);
+    console.log('TodoItems', props.listArr.listArr)
+    useEffect(() => {
+        setListArr([...props.listArr.listArr])
+    }, [props]);
     return (
         <>
             <ListGroup >
