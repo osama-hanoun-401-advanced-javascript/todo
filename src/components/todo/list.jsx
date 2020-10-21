@@ -1,55 +1,91 @@
-import React from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
-
+import ListItems from './listItems';
 import ListGroup from 'react-bootstrap/ListGroup'
+import { SettingsContext } from '../../context/settings';
 
 function TodoList(props) {
-  return (
+  const settingsContext = useContext(SettingsContext);
+  const [render, setRender] = useState({ numberOfPagesArr: [], listArr: [] });
+  const [shownItems, setShownItems] = useState({ listArr: [] })
+  // useEffect(() => {
+  //   let settings = { ...settingsContext.value }
+  //   let listArr = [...props.list];
+  //   if (settings.completedTasks === 'false') listArr.filter((val) => { if (!val.complete) return val });
+  //   listArr.sort((a, b) => b.difficulty - a.difficulty);
+  //   if (settings.sort === "descending") listArr.reverse();
+  //   let numberOfPages;
+  //   let numberOfPagesArr = [];
+  //   numberOfPages = Math.ceil(listArr.length / settings.numberOfItems);
+  //   numberOfPagesArr = [];
+  //   for (let i = 0; i < numberOfPages; i++) {
+  //     numberOfPagesArr[i] = i;
+  //   }
+  //   setRender({ numberOfPagesArr, listArr })
+  //   console.log('render.listArr', listArr)
+  // }, []);
+  useEffect(() => {
+    let settings = { ...settingsContext.value }
+    let listArr = [...props.list];
+    if (settings.completedTasks === 'false') listArr = [...listArr.filter((val) => { return !val.complete })];
+    listArr.sort((a, b) => b.difficulty - a.difficulty);
+    if (settings.sort !== "descending") listArr.reverse();
+    let numberOfPages = Math.ceil(listArr.length / Number(settings.numberOfItems));
+    let numberOfPagesArr = [];
+    for (let i = 0; i < numberOfPages; i++) {
+      numberOfPagesArr[i] = i;
+    }
+    console.log(
+      `Number(settings.numberOfItems)`, Number(settings.numberOfItems),
+      'numberOfPagesArr', numberOfPagesArr,
+    )
 
-    <ListGroup>
-      {
-        props.list.map(item => (
-          <ListGroup.Item className="mb-3" variant=""
-            key={item._id}
-          >
-            <Container>
-              <Row >
-                <Col xs={1}>
-                  <Button size="sm" onClick={() => props.handleComplete(item._id)} pill variant={item.complete ? "danger" : "success"}> {item.complete ? <span> Complete</span> : <span>Pending</span>} </Button>
-                </Col>
-
-                <Col xs={{ span: 1, offset: 10 }}>
-                  <Button size="sm" onClick={() => props.handleDelete(item._id)} ><span> X </span></Button>
-                </Col>
-              </Row>
-              <hr />
-              <Row className="pb-1 pt-1">
-                <Col >
-                  <span >
-                    {item.text}
-                  </span>
-                </Col>
-              </Row>
-              <hr />
-              <Row>
-                <Col xs={{ span: 4, offset: 10 }} >
-                  <span >
-                    Difficulty: {item.difficulty}
-                  </span>
-                </Col>
-              </Row>
-
-            </Container>
-
-
-
-          </ListGroup.Item>
-        ))
+    setRender({ numberOfPagesArr, listArr })
+    let limitedListArr = [];
+    for (let i = 0; i < listArr.length && i < Number(settings.numberOfItems); i++) {
+      limitedListArr[i] = listArr[i];
+    }
+    setShownItems({ listArr: limitedListArr });
+  }, [props.list, settingsContext]);
+  function _handleOnClick(event) {
+    // i < listArr.length && i <
+    let limitedListArr = [];
+    for (let i = 0; i < document.getElementsByClassName('itemsListGroup').length; i++) {
+      document.getElementsByClassName('itemsListGroup')[i].innerHTML = '';
+    }
+    console.log('event.target.key', event.target.value)
+    try {
+      for (let i = 0, j = (event.target.value - 1) * Number(settingsContext.value.numberOfItems); i < Number(settingsContext.value.numberOfItems); i++) {
+        limitedListArr[i] = render.listArr[j];
       }
-    </ListGroup >
+    } catch (error) {
+
+    }
+    console.log('limitedListArr', limitedListArr)
+    setShownItems({ listArr: limitedListArr });
+  }
+  /* 
+  completedTasks: "true"
+  ​
+  numberOfItems: "374"
+  ​
+  sort: "descending"
+  */
+
+
+  return (
+    <>
+      <ListItems listArr={shownItems.listArr} />
+      <Container>
+        <Row >
+          {render.numberOfPagesArr.map((val, indx) => <Button onClick={_handleOnClick} className="m-2" value={indx + 1} key={indx + 1}> {indx + 1}</Button>)}
+        </Row>
+      </Container>
+    </>
+
   );
 }
 
