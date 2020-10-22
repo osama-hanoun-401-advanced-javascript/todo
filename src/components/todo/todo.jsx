@@ -1,12 +1,16 @@
 import React from 'react';
 import TodoConnected from './todo-connected.jsx';
+import Auth from '../../auth/auth';
 
 function ToDo(props) {
+
   return (
     <>
-      <TodoConnected />
+      <Auth action="read">
+        < TodoConnected />
+      </Auth >
+
     </>
   );
 }
-
 export default ToDo;
