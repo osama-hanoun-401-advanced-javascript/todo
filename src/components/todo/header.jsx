@@ -9,8 +9,8 @@ const Header = props => {
         <header>
             <Navbar bg="dark" variant="dark">
                 <Navbar.Brand className="mr-auto" >
-                    <NavLink to="/" activeClassName="list-class">TODO</NavLink></Navbar.Brand>
-                <NavLink to="/" activeClassName="list-class"><Button>Home</Button></NavLink>
+                    <NavLink to="/todo" activeClassName="list-class">TODO</NavLink></Navbar.Brand>
+                <NavLink to="/todo" activeClassName="list-class"><Button>Home</Button></NavLink>
                 <NavLink to="/settings" activeClassName="list-class"><Button>Settings</Button></NavLink>
             </Navbar>
         </header>

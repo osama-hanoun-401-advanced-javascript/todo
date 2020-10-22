@@ -4,6 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import ListGroup from 'react-bootstrap/ListGroup'
+import Auth from '../../auth/auth';
 
 function TodoItems(props) {
     const [listArr, setListArr] = useState([...props.listArr.listArr]);
@@ -25,11 +26,18 @@ function TodoItems(props) {
                             <Container>
                                 <Row >
                                     <Col xs={1}>
-                                        <Button size="sm" onClick={() => props.handlers.handleComplete(item._id)} pill={'true'} variant={item.complete ? "danger" : "success"}> {item.complete ? <span> Complete</span> : <span>Pending</span>} </Button>
+
+                                        <Button size="sm" pill={'true'} variant={item.complete ? "danger" : "success"}>     {item.complete ? <span> complete</span> : <span>Pending</span>}
+                                            <Auth action="update">
+                                                <span onClick={() => props.handlers.handleComplete(item._id)}  >&#128393;</span>
+                                            </Auth>
+                                        </Button>
                                     </Col>
 
                                     <Col xs={{ span: 1, offset: 10 }}>
-                                        <Button size="sm" onClick={() => props.handlers.handleDelete(item._id)} ><span> X </span></Button>
+                                        <Auth action="delete">
+                                            <Button size="sm" onClick={() => props.handlers.handleDelete(item._id)} ><span> X </span></Button>
+                                        </Auth>
                                     </Col>
                                 </Row>
                                 <hr />
